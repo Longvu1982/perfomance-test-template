@@ -18,8 +18,8 @@ To begin using this template, follow these steps:
 
 1. Use typescript, for styling, you can choose between tailwind or scss module.
 2. Ability to create, delete, and check to-dos. Each to-do should contain a label and a description content.
-3. Ability to filter between all tasks, pending tasks, and completed tasks, and filter by label.
-4. Ability to collapse and expand individual tasks, and a button to expand or collapse all tasks.
+3. Ability to filter between all tasks, pending tasks, and completed tasks, and filter by search text.
+4. Ability to SAVE YOUR DATA PERSIST using local storage.
 5. Ability to drag and drop to-dos to rearrange the order of tasks.
 
 **Optional Enhancements:**
@@ -47,20 +47,16 @@ import React from 'react';
 
 const DraggableComponent = () => {
   const handleDragStart = (e) => {
-    // Add your logic here
-  };
-
-  const handleDrag = (e) => {
-    // Add your logic here
+    // get the drag id
   };
 
   const handleDragEnter = (e) => {
-    // Add your logic here
+    e.preventDefault();
+    // get the drop id
   };
 
   const handleDragOver = (e) => {
     e.preventDefault();
-    // Add your logic here
   };
 
   const handleDragLeave = (e) => {
@@ -68,16 +64,15 @@ const DraggableComponent = () => {
   };
 
   const handleDrop = (e) => {
-   // Add your logic here
-  };
+   // Add swap element logic here
+  }
 
   return (
     <div
       draggable
       onDragStart={handleDragStart}
-      onDrag={handleDrag}
-      onDragEnter={handleDragEnter}
       onDragOver={handleDragOver}
+      onDragEnterCapture={handleDragEnter}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
     >
@@ -87,3 +82,32 @@ const DraggableComponent = () => {
 };
 
 export default DraggableComponent;
+```
+# React Portal API in React
+
+## Introduction
+This document explains how to use the React portal to create element on a separate layer.
+
+## Setup
+Ensure that you have a React project set up with the necessary dependencies installed.
+
+## Usage
+
+### Basic Example
+
+```jsx
+import { createPortal } from 'react-dom';
+
+export default function MyComponent() {
+  return (
+    <div style={{ border: '2px solid black' }}>
+      <p>This child is placed in the parent div.</p>
+      {createPortal(
+        <p>This child is placed in the document body.</p>,
+        document.body
+      )}
+    </div>
+  );
+}
+
+
